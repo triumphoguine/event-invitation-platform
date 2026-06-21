@@ -22,8 +22,7 @@ export default function InvitePage() {
 }
 
 function InviteContent() {
-  const searchParams = useSearchParams();
-  const ticketRef = useRef<HTMLDivElement>(null);
+  const searchParams = useSearchParams(); const ticketRef = useRef<HTMLDivElement>(null);
 
   const [guest, setGuest] = useState<Guest | null>(null);
   const [error, setError] = useState("");
