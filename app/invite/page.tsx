@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import QRCode from "react-qr-code";
 import html2canvas from "html2canvas";
@@ -14,6 +14,14 @@ type Guest = {
 };
 
 export default function InvitePage() {
+  return (
+    <Suspense fallback={<main style={pageStyle}>Loading invitation...</main>}>
+      <InviteContent />
+    </Suspense>
+  );
+}
+
+function InviteContent() {
   const searchParams = useSearchParams();
   const ticketRef = useRef<HTMLDivElement>(null);
 
