@@ -1,7 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useRef, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import QRCode from "react-qr-code";
 import html2canvas from "html2canvas";
 import { supabase } from "@/lib/supabase";
@@ -14,15 +13,7 @@ type Guest = {
 };
 
 export default function InvitePage() {
-  return (
-    <Suspense fallback={<main style={pageStyle}>Loading invitation...</main>}>
-      <InviteContent />
-    </Suspense>
-  );
-}
-
-function InviteContent() {
-  const searchParams = useSearchParams(); const ticketRef = useRef<HTMLDivElement>(null);
+  const ticketRef = useRef<HTMLDivElement>(null);
 
   const [guest, setGuest] = useState<Guest | null>(null);
   const [error, setError] = useState("");
@@ -34,7 +25,8 @@ function InviteContent() {
   const slides = ["/slide1.png", "/slide2.png"];
 
   useEffect(() => {
-    const codeFromUrl = searchParams.get("code");
+    const params = new URLSearchParams(window.location.search);
+    const codeFromUrl = params.get("code");
 
     if (!codeFromUrl) {
       setError("Invalid invitation link");
@@ -43,7 +35,7 @@ function InviteContent() {
     }
 
     fetchGuest(codeFromUrl);
-  }, [searchParams]);
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -125,7 +117,7 @@ function InviteContent() {
     );
   }
 
-  const qrValue = `http://localhost:3000/admin/verify?code=${guest.invite_code}`;
+  const qrValue = `https://event-invitation-platform.vercel.app/admin/verify?code=${guest.invite_code}`;
   const hasAccepted = guest.rsvp_status === "Accepted";
 
   return (
@@ -259,7 +251,11 @@ function InviteContent() {
         <div style={hiddenTicketWrapper}>
           <div ref={ticketRef} style={ticketStyle}>
             <div style={ticketInnerBorder}>
-              <img src="/logo.png" alt="Celebrating Pastor Obi" style={ticketLogoStyle} />
+              <img
+                src="/logo.png"
+                alt="Celebrating Pastor Obi"
+                style={ticketLogoStyle}
+              />
 
               <p style={ticketSmallGold}>GRAND CELEBRATION</p>
               <h1 style={ticketTitle}>Birthday Banquet</h1>
