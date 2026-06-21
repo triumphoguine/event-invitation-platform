@@ -22,7 +22,7 @@ export default function InvitePage() {
   const [downloading, setDownloading] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  const slides = ["/slide1.png", "/slide2.png"];
+  const slides = ["/pastor-slide-1.png?v=1", "/pastor-slide-2.png?v=1"];
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
