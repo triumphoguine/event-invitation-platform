@@ -193,16 +193,6 @@ export default function InvitePage() {
 
         <div style={webCardStyle}>
           <p style={smallGoldText}>YOU ARE INVITED</p>
-          <p
-  style={{
-    color: "red",
-    fontWeight: "bold",
-    fontSize: "24px",
-    marginTop: "20px",
-  }}
->
-  TEST VERSION JUNE 2026
-</p>
           <p style={smallWhiteText}>HIGHLY ESTEEMED</p>
 
           <h1 style={guestNameStyle}>{guest.full_name}</h1>
